@@ -4,12 +4,18 @@ workflows:
     environment:
       vars:
         JAVA_VERSION: 17
+
       android_signing:
-        keystore: false
+        - keystore: null   # No keystore used
+
     scripts:
-      - name: Use Codemagic’s Gradle
-        script: echo "Using Codemagic system Gradle"
-      - name: Build APK
-        script: ./gradlew assembleDebug || gradle assembleDebug
+      - name: Use Codemagic system Gradle
+        script: |
+          echo "Using Codemagic system Gradle"
+
+      - name: Build Debug APK
+        script: |
+          gradle assembleDebug
+
     artifacts:
       - app/build/outputs/**/*.apk
