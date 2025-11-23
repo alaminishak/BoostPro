@@ -4,7 +4,8 @@ workflows:
     environment:
       java: 17
 
-      android_signing: []   # <-- disables signing safely
+      android_signing:
+        - keystore: debug_keystore
 
     scripts:
       - name: Build Debug APK
