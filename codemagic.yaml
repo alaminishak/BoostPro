@@ -2,20 +2,14 @@ workflows:
   android-app:
     name: Build BoostPro
     environment:
-      vars:
-        JAVA_VERSION: 17
+      java: 17
 
-      android_signing:
-        - keystore: null   # No keystore used
+      android_signing: []   # <-- disables signing safely
 
     scripts:
-      - name: Use Codemagic system Gradle
-        script: |
-          echo "Using Codemagic system Gradle"
-
       - name: Build Debug APK
         script: |
-          gradle assembleDebug
+          ./gradlew assembleDebug || gradle assembleDebug
 
     artifacts:
       - app/build/outputs/**/*.apk
